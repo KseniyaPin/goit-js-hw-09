@@ -40,7 +40,7 @@ const options = {
         timerId = setInterval(() => {
           const currentTime = Date.now();
           // console.log(currentTime);
-          // console.log(convertMs(selectedDates[0] - currentTime));
+          
           const result = convertMs(selectedDates[0] - currentTime);
           date.days.textContent = addLeadingZero(result.days);
           date.hours.textContent = addLeadingZero(result.hours);
@@ -61,7 +61,8 @@ const options = {
   },
 };
 
-inputEl.value = flatpickr('#datetime-picker', options);
+flatpickr('#datetime-picker', options);
+// console.log(inputEl.value);
 
 function addLeadingZero(elem) {
   return `${elem.toString().padStart(2, '0')}`;
