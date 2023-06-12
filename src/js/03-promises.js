@@ -24,7 +24,7 @@ function onFormSubmit(evt) {
     createPromise(position, delay);
     delay += step;
   }
-  // evt.target.reset();
+  evt.target.reset();
 }
 
 function createPromise(position, delay) {
