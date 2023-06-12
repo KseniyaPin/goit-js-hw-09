@@ -32,6 +32,7 @@ const options = {
   onClose(selectedDates) {
     if (selectedDates[0] < currentTime) {
       Notiflix.Notify.failure('Please choose a date in the future');
+      return;
     } else {
       buttonStart.disabled = false;
       buttonStart.addEventListener('click', () => {
@@ -39,11 +40,12 @@ const options = {
         timerId = setInterval(() => {
           const currentTime = Date.now();
           // console.log(currentTime);
-          console.log(convertMs(selectedDates[0] - currentTime));
-          date.days.textContent = result.days;
-          date.hours.textContent = result.hours.toString().padStart(2, '0');
-          date.minutes.textContent = result.minutes.toString().padStart(2, '0');
-          date.seconds.textContent = result.seconds.toString().padStart(2, '0');
+          // console.log(convertMs(selectedDates[0] - currentTime));
+          const result = convertMs(selectedDates[0] - currentTime);
+          date.days.textContent = addLeadingZero(result.days);
+          date.hours.textContent = addLeadingZero(result.hours);
+          date.minutes.textContent = addLeadingZero(result.minutes);
+          date.seconds.textContent = addLeadingZero(result.seconds);
           if (
             result.days <= 0 &&
             result.hours <= 0 &&
@@ -61,17 +63,9 @@ const options = {
 
 inputEl.value = flatpickr('#datetime-picker', options);
 
-// buttonStart.addEventListener('click', () => {
-//   buttonStart.disabled = true;
-//   timerId = setInterval(() => {
-//     // console.log(result);
-//     // options.onClose(selectedDates);
-//     date.days.textContent = result.days;
-//     date.hours.textContent = result.hours.toString().padStart(2, '0');
-//     date.minutes.textContent = result.minutes.toString().padStart(2, '0');
-//     date.seconds.textContent = result.seconds.toString().padStart(2, '0');
-//   }, 1000);
-// });
+function addLeadingZero(elem) {
+  return `${elem.toString().padStart(2, '0')}`;
+}
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -89,7 +83,7 @@ function convertMs(ms) {
   // Remaining seconds
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
-  return (result = { days, hours, minutes, seconds });
+  return { days, hours, minutes, seconds };
 }
 
 // enableTime - Boolean false Включает выбор времени
