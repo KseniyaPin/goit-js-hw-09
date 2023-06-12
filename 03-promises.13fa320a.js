@@ -1,2 +1,0 @@
-const e=document.querySelector(".form");console.log("formData"),e.addEventListener("submit",(function(e){const t=e.currentTarget.elements,o=t.delay.value,n=t.step.value,l=t.amount.value,a={delay:o,step:n,amount:l};if(""!==o&&""!==n&&""!==l)return console.log(a);if(""===o||""===n||""===l)return alert("Пожалуйста, заполните все поля!");for(let e=1;e<=l;e+=1)console.log("delay=",o," step=",n," amount=",l)}));
-//# sourceMappingURL=03-promises.13fa320a.js.map
