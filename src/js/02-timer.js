@@ -2,6 +2,8 @@
 import flatpickr from 'flatpickr';
 // Дополнительный импорт стилей
 import 'flatpickr/dist/flatpickr.min.css';
+// notiflix
+import Notiflix from 'notiflix';
 
 const buttonStart = document.querySelector('button[data-start]');
 const inputEl = document.querySelector('input');
@@ -29,7 +31,7 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     if (selectedDates[0] < currentTime) {
-      alert('Please choose a date in the future');
+      Notiflix.Notify.failure('Please choose a date in the future');
     } else {
       buttonStart.disabled = false;
       buttonStart.addEventListener('click', () => {
